@@ -1,86 +1,122 @@
-﻿using CyDrive.Model;
-using CyDrive.Utils;
+﻿using CyDrive.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Google.Protobuf;
+using System.Threading;
+using System.IO;
 
 namespace CyDrive
 {
-	public class CyDriveClient
-	{
-		private HttpClient client;
+    public class CyDriveClient
+    {
+        private HttpClient client;
+        private ConcurrentDictionary<long, DataTask> taskMap = new ConcurrentDictionary<long, DataTask>();
 
-		public readonly string ServerAddr = "123.57.39.79:6454";
-		public bool IsLogin { get; set; }
-		public User User;
-
-
-		public CyDriveClient()
-		{
-			// Set up http client
-			var baseAddr = new Uri(string.Format("http://{0}", ServerAddr));
-			var cookieContainer = new CookieContainer();
-			var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
-			client = new HttpClient(handler) { BaseAddress = baseAddr };
-
-			// Read user info
-			try
-			{
-				var userJson = System.IO.File.ReadAllText(Consts.UserFile);
-				User = JsonSerializer.Deserialize<User>(userJson);
-			}
-			catch (Exception e)
-			{
-				throw e;
-			}
-		}
-
-		public async Task<bool> LoginAsync()
-		{
-			// Post login request
-			var resp = await client.PostAsync("/login", new FormUrlEncodedContent(new[]
-			{
-				new KeyValuePair<string,string>("username","test"),
-				new KeyValuePair<string, string>("password",Utils.Utils.PasswordHash("testCyDrive")),
-			}));
+        public readonly string ServerAddr = "123.57.39.79:6454";
+        public bool IsLogin { get; set; }
+        public Account Account = new Account();
 
 
-			// Get the resp
-			var res = await JsonSerializer.DeserializeAsync<Resp>(await resp.Content.ReadAsStreamAsync());
+        public CyDriveClient(string ServerAddr, Account account = null)
+        {
+            // Set up http client
+            var baseAddr = new Uri(string.Format("http://{0}", ServerAddr));
+            var cookieContainer = new CookieContainer();
+            var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
+            client = new HttpClient(handler) { BaseAddress = baseAddr };
 
-			if (!res.IsStatusOK())
-			{
-				throw new Exception(res.Message);
-			}
+            if (account != null)
+            {
+                Account = account;
+            }
+        }
 
-			IsLogin = true;
+        public async Task<bool> RegisterAsync(Account account = null)
+        {
+            if (account != null)
+            {
+                if (account.Email is null || account.Password is null)
+                {
+                    throw new InvalidParameterException("email or password is null");
+                }
 
-			return res.IsStatusOK();
-		}
+                Account = account;
+            }
 
-		public async Task<FileInfo[]> ListRemoteDirAsync(string path = "")
-		{
-			path = path.Replace('\\', '/');
+            var req = new RegisterRequest()
+            {
+                Email = Account.Email,
+                Password = Account.Password,
+                Name = Account.Name,
+                Cap = Account.Cap,
+            };
+            var res = await client.PostAsync("/register",
+                new StringContent(JsonFormatter.Default.Format(req)));
 
-			var resp = await client.GetAsync("/list" + string.Format("/{0}", Uri.EscapeUriString(path)));
+            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
 
-			var resJson = await resp.Content.ReadAsStringAsync();
-			var res = JsonSerializer.Deserialize<Resp>(resJson);
+            return resp.StatusCode == StatusCode.Ok;
+        }
 
-			if (!res.IsStatusOK())
-			{
-				throw new Exception(res.Message);
-			}
+        public async Task<bool> LoginAsync(Account account = null)
+        {
+            if (account != null)
+            {
+                if (account.Email is null || account.Password is null)
+                {
+                    throw new InvalidParameterException("email or password is null");
+                }
 
-			List<FileInfo> list = JsonSerializer.Deserialize<List<FileInfo>>(res.Data);
+                Account = account;
+            }
 
-			return list.ToArray();
-		}
+            var req = new LoginRequest()
+            {
+                Email = Account.Email,
+                Password = Account.Password,
+            };
+            // Post login request
+            var res = await client.PostAsync("/login",
+                new StringContent(JsonFormatter.Default.Format(req)));
+            if (!res.IsSuccessStatusCode)
+            {
+                return false;
+            }
 
-		/*public async Task<FileInfo[]> ListLocalDirAsync()
+            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+
+            IsLogin = resp.StatusCode == StatusCode.Ok;
+
+            return IsLogin;
+        }
+
+        //public async Task<FileInfo[]> ListRemoteDirAsync(string path = "")
+        //{
+        //    path = path.Replace('\\', '/');
+
+        //    var res = await client.GetAsync("/list" + string.Format("/{0}", Uri.EscapeUriString(path)));
+        //    if (!res.IsSuccessStatusCode)
+        //    {
+        //        return null;
+        //    }
+        //    var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+
+        //    var getFileListResponse = JsonParser.Default.Parse<GetFileListResponse>(resp.Data);
+
+        //    var fileInfoList = new FileInfo[getFileListResponse.FileInfoList.Count];
+        //    for (var i = 0; i < fileInfoList.Length; i++)
+        //    {
+        //        fileInfoList[i] = getFileListResponse.FileInfoList[i];
+        //    }
+        //    return fileInfoList;
+        //}
+
+        /*public async Task<FileInfo[]> ListLocalDirAsync()
 		{
 			List<string> fileNameList = new List<string>(System.IO.Directory.GetDirectories(User.WorkDir));
 			fileNameList.AddRange(System.IO.Directory.GetFiles(User.WorkDir));
@@ -96,84 +132,95 @@ namespace CyDrive
 			return fileInfoList.ToArray();
 		}*/
 
-		public async Task<FileInfo> GetFileInfoAsync(string path)
-		{
-			var resp = await client.GetAsync("/file_info" + string.Format("/{0}", Uri.EscapeUriString(path)));
+        public async Task<Models.FileInfo> GetFileInfoAsync(string path)
+        {
+            var res = await client.GetAsync("/file_info" + string.Format("/{0}", Uri.EscapeUriString(path)));
+            if (!res.IsSuccessStatusCode)
+            {
+                return null;
+            }
+            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
 
-			var resJson = await resp.Content.ReadAsStringAsync();
-			var res = JsonSerializer.Deserialize<Resp>(resJson);
 
-			if (!res.IsStatusOK())
-			{
-				throw new Exception(res.Message);
-			}
+            if (resp.StatusCode != StatusCode.Ok)
+            {
+                return null;
+            }
 
-			return JsonSerializer.Deserialize<FileInfo>(res.Data);
-		}
+            var fileInfo = JsonParser.Default.Parse<Models.FileInfo>(resp.Data);
 
-		public async Task<Resp> PutFileInfoAsync(FileInfo fileInfo)
-		{
-			var fileInfoJson = JsonSerializer.Serialize(fileInfo);
-			var resp = await client.PutAsync("/file_info" + string.Format("/{0}", Uri.EscapeUriString(fileInfo.FilePath)),
-				new StringContent(fileInfoJson));
+            return fileInfo;
+        }
 
-			var res = JsonSerializer.Deserialize<Resp>(await resp.Content.ReadAsStringAsync());
+        public async Task<DataTask> DownloadAsync(string path, string savePath)
+        {
+            path.Replace('\\', '/');
+            var res = await client.GetAsync("/file" + string.Format("/{0}", Uri.EscapeUriString(path)));
+            if (!res.IsSuccessStatusCode)
+            {
+                return null;
+            }
 
-			if (!res.IsStatusOK())
-			{
-				throw new Exception(res.Message);
-			}
+            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+            var downloadResponse = JsonParser.Default.Parse<DownloadResponse>(resp.Data);
 
-			return res;
-		}
 
-		public async Task<bool> DownloadAsync(string path)
-		{
-			var fileInfo = await GetFileInfoAsync(path);
-			if (fileInfo == null)
-				return false;
+            var task = new DataTask(downloadResponse.TaskId, DataTaskType.Download,
+                savePath, 0, Utils.ParseIpAddr(downloadResponse.NodeAddr),
+                downloadResponse.FileInfo);
 
-			string localPath = System.IO.Path.Combine(User.RootDir, fileInfo.FilePath);
-			var resp = await client.GetAsync("/file" + string.Format("/{0}", Uri.EscapeUriString(path)));
-			await System.IO.File.WriteAllBytesAsync(localPath, await resp.Content.ReadAsByteArrayAsync());
-			return true;
-		}
+            AddTask(task);
+            return task;
+        }
 
-		public async Task<Resp> UploadAsync(string path)
-		{
-			var fileData = await System.IO.File.ReadAllBytesAsync(
-				System.IO.Path.Combine(User.WorkDir, path));
+        public async Task<DataTask> UploadAsync(string absPath, string savePath)
+        {
+            var osFileInfo = new System.IO.FileInfo(absPath);
+            Models.FileInfo fileInfo = new Models.FileInfo()
+            {
+                FilePath = savePath,
+                Size = osFileInfo.Length,
+                IsCompressed = false,
+                IsDir = false,
+                ModifyTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(osFileInfo.LastWriteTime),
+            };
 
-			FileInfo fileInfo = new FileInfo(User, path);
+            var req = new UploadRequest()
+            {
+                FileInfo = fileInfo,
+            };
+            var res = await client.PutAsync("/file" + string.Format("/{0}", Uri.EscapeDataString(savePath)),
+                new StringContent(JsonFormatter.Default.Format(req)));
 
-			string fileInfoJson = JsonSerializer.Serialize(fileInfo);
-			var resp = await client.PutAsync("/file" + string.Format("/{0}", Uri.EscapeDataString(path)),
-				new ByteArrayContent(fileData));
-			await PutFileInfoAsync(fileInfo);
+            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+            var uploadResp = JsonParser.Default.Parse<UploadResponse>(resp.Data);
 
-			var resJson = await resp.Content.ReadAsStringAsync();
-			var res = JsonSerializer.Deserialize<Resp>(resJson);
+            var task = new DataTask(uploadResp.TaskId, DataTaskType.Upload,
+                savePath, 0, Utils.ParseIpAddr(uploadResp.NodeAddr),
+                fileInfo);
 
-			if (!res.IsStatusOK())
-			{
-				throw new Exception("upload failed");
-			}
+            AddTask(task);
 
-			return res;
-		}
+            return task;
+        }
 
-		public async Task<Resp> DeleteFileAsync(string path)
-		{
-			var resp = await client.DeleteAsync("/file" + string.Format("/{0}", Uri.EscapeUriString(path)));
-			var resJson = await resp.Content.ReadAsStringAsync();
-			var res = JsonSerializer.Deserialize<Resp>(resJson);
+        //public async Task<Resp> DeleteFileAsync(string path)
+        //{
+        //    var resp = await client.DeleteAsync("/file" + string.Format("/{0}", Uri.EscapeUriString(path)));
+        //    var resJson = await resp.Content.ReadAsStringAsync();
+        //    var res = JsonSerializer.Deserialize<Resp>(resJson);
 
-			if (!res.IsStatusOK())
-			{
-				throw new Exception("Delete failed");
-			}
+        //    if (!res.IsStatusOK())
+        //    {
+        //        throw new Exception("Delete failed");
+        //    }
 
-			return res;
-		}
-	}
+        //    return res;
+        //}
+
+        public void AddTask(DataTask task)
+        {
+            taskMap.TryAdd(task.Id, task);
+        }
+    }
 }
