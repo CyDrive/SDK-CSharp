@@ -15,13 +15,10 @@ namespace CyDrive
     public class CyDriveClient
     {
         private HttpClient client;
-        private ConcurrentDictionary<long, DataTask> taskMap = new ConcurrentDictionary<long, DataTask>();
-        private ConcurrentQueue<Task> taskQueue = new ConcurrentQueue<Task>();
 
         public readonly string ServerAddr = "123.57.39.79:6454";
         public bool IsLogin { get; set; }
         public Account Account = new Account();
-
 
         public CyDriveClient(string ServerAddr, Account account = null)
         {
@@ -104,26 +101,28 @@ namespace CyDrive
             return IsLogin;
         }
 
-        //public async Task<FileInfo[]> ListRemoteDirAsync(string path = "")
-        //{
-        //    path = path.Replace('\\', '/');
+        public async Task<Models.FileInfo[]> ListDirAsync(string path = "")
+        {
+            path = path.Replace('\\', '/');
 
-        //    var res = await client.GetAsync("/list" + string.Format("/{0}", Uri.EscapeUriString(path)));
-        //    if (!res.IsSuccessStatusCode)
-        //    {
-        //        return null;
-        //    }
-        //    var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+            var res = await client.GetAsync("/list" + string.Format("/{0}", Uri.EscapeUriString(path)));
+            if (!res.IsSuccessStatusCode)
+            {
+                return null;
+            }
+            var resBody = await res.Content.ReadAsStringAsync();
+            Console.Error.WriteLine(resBody);
 
-        //    var getFileListResponse = JsonParser.Default.Parse<GetFileListResponse>(resp.Data);
+            var resp = JsonParser.Default.Parse<Response>(resBody);
+            var getFileListResponse = JsonParser.Default.Parse<GetFileListResponse>(resp.Data);
 
-        //    var fileInfoList = new FileInfo[getFileListResponse.FileInfoList.Count];
-        //    for (var i = 0; i < fileInfoList.Length; i++)
-        //    {
-        //        fileInfoList[i] = getFileListResponse.FileInfoList[i];
-        //    }
-        //    return fileInfoList;
-        //}
+            var fileInfoList = new Models.FileInfo[getFileListResponse.FileInfoList.Count];
+            for (var i = 0; i < fileInfoList.Length; i++)
+            {
+                fileInfoList[i] = getFileListResponse.FileInfoList[i];
+            }
+            return fileInfoList;
+        }
 
         /*public async Task<FileInfo[]> ListLocalDirAsync()
 		{
@@ -164,7 +163,7 @@ namespace CyDrive
             return fileInfo;
         }
 
-        public async Task<DataTask> DownloadAsync(string path, string savePath)
+        public async Task<DataTask> DownloadAsync(string path, string savePath, bool autoStartTask = true, bool shouldTruncate = false)
         {
             path.Replace('\\', '/');
             var res = await client.GetAsync("/file" + string.Format("/{0}", Uri.EscapeUriString(path)));
@@ -181,15 +180,21 @@ namespace CyDrive
 
             Console.Error.WriteLine(resp.Data);
 
-            var task = new DataTask(this, downloadResponse.TaskId, DataTaskType.Download,
+            var task = new DataTask(downloadResponse.TaskId, DataTaskType.Download,
                 savePath, 0, Utils.ParseIpAddr(downloadResponse.NodeAddr),
-                downloadResponse.FileInfo);
+                downloadResponse.FileInfo)
+            {
+                ShouldTruncate = shouldTruncate,
+            };
 
-            AddTask(task);
+            if (autoStartTask)
+            {
+                task.StartAsync();
+            }
             return task;
         }
 
-        public async Task<DataTask> UploadAsync(string absPath, string savePath)
+        public async Task<DataTask> UploadAsync(string absPath, string savePath, bool autoStartTask = true)
         {
             var osFileInfo = new System.IO.FileInfo(absPath);
             Models.FileInfo fileInfo = new Models.FileInfo()
@@ -207,15 +212,25 @@ namespace CyDrive
             };
             var res = await client.PutAsync("/file" + string.Format("/{0}", Uri.EscapeDataString(savePath)),
                 new StringContent(JsonFormatter.Default.Format(req)));
+            if (!res.IsSuccessStatusCode)
+            {
+                return null;
+            }
 
-            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+            var resBody = await res.Content.ReadAsStringAsync();
+            Console.Error.WriteLine(resBody);
+
+            var resp = JsonParser.Default.Parse<Response>(resBody);
             var uploadResp = JsonParser.Default.Parse<UploadResponse>(resp.Data);
 
-            var task = new DataTask(this, uploadResp.TaskId, DataTaskType.Upload,
+            var task = new DataTask(uploadResp.TaskId, DataTaskType.Upload,
                 savePath, 0, Utils.ParseIpAddr(uploadResp.NodeAddr),
                 fileInfo);
 
-            AddTask(task);
+            if (autoStartTask)
+            {
+                task.StartAsync();
+            }
 
             return task;
         }
@@ -233,24 +248,5 @@ namespace CyDrive
 
         //    return res;
         //}
-
-        public void AddTask(DataTask task)
-        {
-            taskMap.TryAdd(task.Id, task);
-            task.Start();
-        }
-
-        public void DropTask(long taskId)
-        {
-            taskMap.TryRemove(taskId, out _);
-        }
-
-        public void WaitForAllTask()
-        {
-            while (taskMap.Count > 0)
-            {
-                Thread.Sleep(1000);
-            }
-        }
     }
 }

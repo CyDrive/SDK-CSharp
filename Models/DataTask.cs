@@ -16,24 +16,27 @@ namespace CyDrive.Models
 
     public class DataTask
     {
-        private CyDriveClient client;
         private TcpClient tcpClient = new TcpClient();
+        private Task innerTask;
 
         public int Id { get; set; }
         public DataTaskType Type { get; set; }
-        public string PeerPath { get; set; }
+        public string LocalPath { get; set; }
         public long Offset { get; set; }
         public IPEndPoint ServerAddr { get; set; }
         public FileInfo FileInfo { get; set; }
-
         public DateTime StartAt { get; set; }
 
-        public DataTask(CyDriveClient client, int id, DataTaskType type, string peerPath, long offset, IPEndPoint serverAddr, FileInfo fileInfo)
+        // Optional parameters
+        public bool ShouldTruncate { get; set; }
+        public int BufferSize { get; set; } = 4096;
+
+
+        public DataTask(int id, DataTaskType type, string localPath, long offset, IPEndPoint serverAddr, FileInfo fileInfo)
         {
-            this.client = client;
             Id = id;
             Type = type;
-            PeerPath = peerPath;
+            LocalPath = localPath;
             Offset = offset;
             ServerAddr = serverAddr;
             FileInfo = fileInfo;
@@ -41,15 +44,17 @@ namespace CyDrive.Models
             StartAt = DateTime.Now;
         }
 
-        public Task Start()
+        public async void StartAsync()
         {
             try
             {
                 tcpClient.Connect(ServerAddr);
+
                 switch (Type)
                 {
                     case DataTaskType.Download:
-                        return DownloadData();
+                        innerTask = DownloadData();
+                        break;
                     case DataTaskType.Upload:
                         break;
                 }
@@ -58,23 +63,26 @@ namespace CyDrive.Models
             {
                 throw ex;
             }
-
-            return null;
         }
 
         public async Task DownloadData()
         {
-            using var fs = File.Open(PeerPath, FileMode.OpenOrCreate | FileMode.Append);
             var stream = tcpClient.GetStream();
+            var sendIdTask = SendIdAsync(stream);
 
-            var idBytes = BitConverter.GetBytes(Id);
-            if (!BitConverter.IsLittleEndian)
+            // Open/Create file
+            var fileMode = FileMode.OpenOrCreate;
+            using var fs = File.Open(LocalPath, fileMode);
+            fs.Seek(Offset, SeekOrigin.Begin);
+            if (ShouldTruncate)
             {
-                Array.Reverse(idBytes);
+                fs.SetLength(Offset);
             }
-            await stream.WriteAsync(idBytes);
 
-            byte[] buf = new byte[4096];
+            await sendIdTask;
+
+            // Download file
+            byte[] buf = new byte[BufferSize];
             while (true)
             {
                 var readBytesCount = await stream.ReadAsync(buf, 0, buf.Length);
@@ -89,7 +97,24 @@ namespace CyDrive.Models
             }
 
             tcpClient.Close();
-            client.DropTask(Id);
+        }
+
+        public void Wait()
+        {
+            if (innerTask != null)
+            {
+                innerTask.Wait();
+            }
+        }
+
+        private async Task SendIdAsync(NetworkStream stream)
+        {
+            var idBytes = BitConverter.GetBytes(Id);
+            if (!BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(idBytes);
+            }
+            await stream.WriteAsync(idBytes);
         }
     }
 }
