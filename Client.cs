@@ -179,9 +179,15 @@ namespace CyDrive
             var downloadResponse = JsonParser.Default.Parse<DownloadResponse>(resp.Data);
 
             Console.Error.WriteLine(resp.Data);
+            long offset = 0;
+            if (!shouldTruncate && File.Exists(savePath))
+            {
+                var osFileInfo = new System.IO.FileInfo(savePath);
+                offset = osFileInfo.Length;
+            }
 
             var task = new DataTask(downloadResponse.TaskId, DataTaskType.Download,
-                savePath, 0, Utils.ParseIpAddr(downloadResponse.NodeAddr),
+                savePath, offset, Utils.ParseIpAddr(downloadResponse.NodeAddr),
                 downloadResponse.FileInfo)
             {
                 ShouldTruncate = shouldTruncate,
@@ -194,7 +200,7 @@ namespace CyDrive
             return task;
         }
 
-        public async Task<DataTask> UploadAsync(string absPath, string savePath, bool autoStartTask = true)
+        public async Task<DataTask> UploadAsync(string absPath, string savePath, bool autoStartTask = true, bool shouldTruncate = false)
         {
             var osFileInfo = new System.IO.FileInfo(absPath);
             Models.FileInfo fileInfo = new Models.FileInfo()
@@ -203,12 +209,13 @@ namespace CyDrive
                 Size = osFileInfo.Length,
                 IsCompressed = false,
                 IsDir = false,
-                ModifyTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(osFileInfo.LastWriteTime),
+                ModifyTime = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.SpecifyKind(osFileInfo.LastWriteTime, DateTimeKind.Utc)),
             };
 
             var req = new UploadRequest()
             {
                 FileInfo = fileInfo,
+                ShouldTruncate = shouldTruncate,
             };
             var res = await client.PutAsync("/file" + string.Format("/{0}", Uri.EscapeDataString(savePath)),
                 new StringContent(JsonFormatter.Default.Format(req)));
@@ -224,7 +231,7 @@ namespace CyDrive
             var uploadResp = JsonParser.Default.Parse<UploadResponse>(resp.Data);
 
             var task = new DataTask(uploadResp.TaskId, DataTaskType.Upload,
-                savePath, 0, Utils.ParseIpAddr(uploadResp.NodeAddr),
+                absPath, uploadResp.Offset, Utils.ParseIpAddr(uploadResp.NodeAddr),
                 fileInfo);
 
             if (autoStartTask)

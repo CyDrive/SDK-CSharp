@@ -28,12 +28,14 @@ namespace CyDrive.Models {
             "b2J1Zi90aW1lc3RhbXAucHJvdG8igwEKCEZpbGVJbmZvEhEKCWZpbGVfcGF0",
             "aBgBIAEoCRIMCgRzaXplGAIgASgDEi8KC21vZGlmeV90aW1lGAMgASgLMhou",
             "Z29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIOCgZpc19kaXIYBCABKAgSFQoN",
-            "aXNfY29tcHJlc3NlZBgFIAEoCEIsWhlnaXRodWIuY29tL0N5RHJpdmUvbW9k",
-            "ZWxzqgIOQ3lEcml2ZS5Nb2RlbHNiBnByb3RvMw=="));
+            "aXNfY29tcHJlc3NlZBgFIAEoCCI4CgxGaWxlSW5mb0xpc3QSKAoOZmlsZV9p",
+            "bmZvX2xpc3QYASADKAsyEC5tb2RlbHMuRmlsZUluZm9CLFoZZ2l0aHViLmNv",
+            "bS9DeURyaXZlL21vZGVsc6oCDkN5RHJpdmUuTW9kZWxzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.FileInfo), global::CyDrive.Models.FileInfo.Parser, new[]{ "FilePath", "Size", "ModifyTime", "IsDir", "IsCompressed" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.FileInfo), global::CyDrive.Models.FileInfo.Parser, new[]{ "FilePath", "Size", "ModifyTime", "IsDir", "IsCompressed" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.FileInfoList), global::CyDrive.Models.FileInfoList.Parser, new[]{ "FileInfoList_" }, null, null, null)
           }));
     }
     #endregion
@@ -279,6 +281,127 @@ namespace CyDrive.Models {
           }
           case 40: {
             IsCompressed = input.ReadBool();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class FileInfoList : pb::IMessage<FileInfoList> {
+    private static readonly pb::MessageParser<FileInfoList> _parser = new pb::MessageParser<FileInfoList>(() => new FileInfoList());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<FileInfoList> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::CyDrive.Models.FileInfoReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FileInfoList() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FileInfoList(FileInfoList other) : this() {
+      fileInfoList_ = other.fileInfoList_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public FileInfoList Clone() {
+      return new FileInfoList(this);
+    }
+
+    /// <summary>Field number for the "file_info_list" field.</summary>
+    public const int FileInfoList_FieldNumber = 1;
+    private static readonly pb::FieldCodec<global::CyDrive.Models.FileInfo> _repeated_fileInfoList_codec
+        = pb::FieldCodec.ForMessage(10, global::CyDrive.Models.FileInfo.Parser);
+    private readonly pbc::RepeatedField<global::CyDrive.Models.FileInfo> fileInfoList_ = new pbc::RepeatedField<global::CyDrive.Models.FileInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::CyDrive.Models.FileInfo> FileInfoList_ {
+      get { return fileInfoList_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as FileInfoList);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(FileInfoList other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!fileInfoList_.Equals(other.fileInfoList_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= fileInfoList_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      fileInfoList_.WriteTo(output, _repeated_fileInfoList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += fileInfoList_.CalculateSize(_repeated_fileInfoList_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(FileInfoList other) {
+      if (other == null) {
+        return;
+      }
+      fileInfoList_.Add(other.fileInfoList_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            fileInfoList_.AddEntriesFrom(input, _repeated_fileInfoList_codec);
             break;
           }
         }

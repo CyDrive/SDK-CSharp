@@ -33,11 +33,12 @@ namespace CyDrive.Models {
             "KAkSEAoIcGFzc3dvcmQYAiABKAkiPwoTR2V0RmlsZUxpc3RSZXNwb25zZRIo",
             "Cg5maWxlX2luZm9fbGlzdBgBIAMoCzIQLm1vZGVscy5GaWxlSW5mbyJbChBE",
             "b3dubG9hZFJlc3BvbnNlEhEKCW5vZGVfYWRkchgBIAEoCRIPCgd0YXNrX2lk",
-            "GAIgASgFEiMKCWZpbGVfaW5mbxgDIAEoCzIQLm1vZGVscy5GaWxlSW5mbyI0",
+            "GAIgASgFEiMKCWZpbGVfaW5mbxgDIAEoCzIQLm1vZGVscy5GaWxlSW5mbyJN",
             "Cg1VcGxvYWRSZXF1ZXN0EiMKCWZpbGVfaW5mbxgBIAEoCzIQLm1vZGVscy5G",
-            "aWxlSW5mbyJECg5VcGxvYWRSZXNwb25zZRIRCglub2RlX2FkZHIYASABKAkS",
-            "DwoHdGFza19pZBgCIAEoBRIOCgZvZmZzZXQYAyABKANCLFoZZ2l0aHViLmNv",
-            "bS9DeURyaXZlL21vZGVsc6oCDkN5RHJpdmUuTW9kZWxzYgZwcm90bzM="));
+            "aWxlSW5mbxIXCg9zaG91bGRfdHJ1bmNhdGUYAiABKAgiRAoOVXBsb2FkUmVz",
+            "cG9uc2USEQoJbm9kZV9hZGRyGAEgASgJEg8KB3Rhc2tfaWQYAiABKAUSDgoG",
+            "b2Zmc2V0GAMgASgDQixaGWdpdGh1Yi5jb20vQ3lEcml2ZS9tb2RlbHOqAg5D",
+            "eURyaXZlLk1vZGVsc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::CyDrive.Models.FileInfoReflection.Descriptor, global::CyDrive.EnumsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -46,7 +47,7 @@ namespace CyDrive.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.LoginRequest), global::CyDrive.Models.LoginRequest.Parser, new[]{ "Email", "Password" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.GetFileListResponse), global::CyDrive.Models.GetFileListResponse.Parser, new[]{ "FileInfoList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.DownloadResponse), global::CyDrive.Models.DownloadResponse.Parser, new[]{ "NodeAddr", "TaskId", "FileInfo" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.UploadRequest), global::CyDrive.Models.UploadRequest.Parser, new[]{ "FileInfo" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.UploadRequest), global::CyDrive.Models.UploadRequest.Parser, new[]{ "FileInfo", "ShouldTruncate" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.UploadResponse), global::CyDrive.Models.UploadResponse.Parser, new[]{ "NodeAddr", "TaskId", "Offset" }, null, null, null)
           }));
     }
@@ -953,6 +954,7 @@ namespace CyDrive.Models {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public UploadRequest(UploadRequest other) : this() {
       fileInfo_ = other.fileInfo_ != null ? other.fileInfo_.Clone() : null;
+      shouldTruncate_ = other.shouldTruncate_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -972,6 +974,17 @@ namespace CyDrive.Models {
       }
     }
 
+    /// <summary>Field number for the "should_truncate" field.</summary>
+    public const int ShouldTruncateFieldNumber = 2;
+    private bool shouldTruncate_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool ShouldTruncate {
+      get { return shouldTruncate_; }
+      set {
+        shouldTruncate_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as UploadRequest);
@@ -986,6 +999,7 @@ namespace CyDrive.Models {
         return true;
       }
       if (!object.Equals(FileInfo, other.FileInfo)) return false;
+      if (ShouldTruncate != other.ShouldTruncate) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -993,6 +1007,7 @@ namespace CyDrive.Models {
     public override int GetHashCode() {
       int hash = 1;
       if (fileInfo_ != null) hash ^= FileInfo.GetHashCode();
+      if (ShouldTruncate != false) hash ^= ShouldTruncate.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1010,6 +1025,10 @@ namespace CyDrive.Models {
         output.WriteRawTag(10);
         output.WriteMessage(FileInfo);
       }
+      if (ShouldTruncate != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(ShouldTruncate);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1020,6 +1039,9 @@ namespace CyDrive.Models {
       int size = 0;
       if (fileInfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(FileInfo);
+      }
+      if (ShouldTruncate != false) {
+        size += 1 + 1;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1038,6 +1060,9 @@ namespace CyDrive.Models {
         }
         FileInfo.MergeFrom(other.FileInfo);
       }
+      if (other.ShouldTruncate != false) {
+        ShouldTruncate = other.ShouldTruncate;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1054,6 +1079,10 @@ namespace CyDrive.Models {
               fileInfo_ = new global::CyDrive.Models.FileInfo();
             }
             input.ReadMessage(fileInfo_);
+            break;
+          }
+          case 16: {
+            ShouldTruncate = input.ReadBool();
             break;
           }
         }

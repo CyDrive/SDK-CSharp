@@ -56,6 +56,7 @@ namespace CyDrive.Models
                         innerTask = DownloadData();
                         break;
                     case DataTaskType.Upload:
+                        innerTask = UploadData();
                         break;
                 }
             }
@@ -93,6 +94,34 @@ namespace CyDrive.Models
 
                 await fs.WriteAsync(buf, 0, readBytesCount);
                 await fs.FlushAsync();
+                Offset += readBytesCount;
+            }
+
+            tcpClient.Close();
+        }
+
+        public async Task UploadData()
+        {
+            var stream = tcpClient.GetStream();
+            var sendIdTask = SendIdAsync(stream);
+
+            using var fs = File.Open(LocalPath, FileMode.Open,FileAccess.Read);
+            fs.Seek(Offset, SeekOrigin.Begin);
+
+            await sendIdTask;
+
+            // Download file
+            byte[] buf = new byte[BufferSize];
+            while (true)
+            {
+                var readBytesCount = await fs.ReadAsync(buf, 0, buf.Length);
+                if (readBytesCount == 0)
+                {
+                    break;
+                }
+
+                await stream.WriteAsync(buf, 0, readBytesCount);
+                await stream.FlushAsync();
                 Offset += readBytesCount;
             }
 

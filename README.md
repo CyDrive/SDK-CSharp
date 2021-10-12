@@ -7,5 +7,5 @@
 | Client |   Register    |  stable  |
 | Client |     Login     |  stable  |
 | Client | Download file |  stable  |
-| Client |  Upload file  | unusable |
+| Client |  Upload file  |  stable  |
 | Client |  GetFileList  |  stable  |
