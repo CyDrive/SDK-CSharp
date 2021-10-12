@@ -16,6 +16,7 @@ namespace CyDrive
     {
         private HttpClient client;
         private ConcurrentDictionary<long, DataTask> taskMap = new ConcurrentDictionary<long, DataTask>();
+        private ConcurrentQueue<Task> taskQueue = new ConcurrentQueue<Task>();
 
         public readonly string ServerAddr = "123.57.39.79:6454";
         public bool IsLogin { get; set; }
@@ -57,8 +58,14 @@ namespace CyDrive
             };
             var res = await client.PostAsync("/register",
                 new StringContent(JsonFormatter.Default.Format(req)));
+            if (!res.IsSuccessStatusCode)
+            {
+                return false;
+            }
 
-            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+            var resBody = await res.Content.ReadAsStringAsync();
+            Console.Error.WriteLine(resBody);
+            var resp = JsonParser.Default.Parse<Response>(resBody);
 
             return resp.StatusCode == StatusCode.Ok;
         }
@@ -88,7 +95,9 @@ namespace CyDrive
                 return false;
             }
 
-            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+            var resBody = await res.Content.ReadAsStringAsync();
+            Console.Error.WriteLine(resBody);
+            var resp = JsonParser.Default.Parse<Response>(resBody);
 
             IsLogin = resp.StatusCode == StatusCode.Ok;
 
@@ -139,7 +148,10 @@ namespace CyDrive
             {
                 return null;
             }
-            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+
+            var resBody = await res.Content.ReadAsStringAsync();
+            Console.Error.WriteLine(resBody);
+            var resp = JsonParser.Default.Parse<Response>(resBody);
 
 
             if (resp.StatusCode != StatusCode.Ok)
@@ -161,11 +173,15 @@ namespace CyDrive
                 return null;
             }
 
-            var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
+            var resBody = await res.Content.ReadAsStringAsync();
+            Console.Error.WriteLine(resBody);
+
+            var resp = JsonParser.Default.Parse<Response>(resBody);
             var downloadResponse = JsonParser.Default.Parse<DownloadResponse>(resp.Data);
 
+            Console.Error.WriteLine(resp.Data);
 
-            var task = new DataTask(downloadResponse.TaskId, DataTaskType.Download,
+            var task = new DataTask(this, downloadResponse.TaskId, DataTaskType.Download,
                 savePath, 0, Utils.ParseIpAddr(downloadResponse.NodeAddr),
                 downloadResponse.FileInfo);
 
@@ -195,7 +211,7 @@ namespace CyDrive
             var resp = JsonParser.Default.Parse<Response>(await res.Content.ReadAsStringAsync());
             var uploadResp = JsonParser.Default.Parse<UploadResponse>(resp.Data);
 
-            var task = new DataTask(uploadResp.TaskId, DataTaskType.Upload,
+            var task = new DataTask(this, uploadResp.TaskId, DataTaskType.Upload,
                 savePath, 0, Utils.ParseIpAddr(uploadResp.NodeAddr),
                 fileInfo);
 
@@ -221,6 +237,20 @@ namespace CyDrive
         public void AddTask(DataTask task)
         {
             taskMap.TryAdd(task.Id, task);
+            task.Start();
+        }
+
+        public void DropTask(long taskId)
+        {
+            taskMap.TryRemove(taskId, out _);
+        }
+
+        public void WaitForAllTask()
+        {
+            while (taskMap.Count > 0)
+            {
+                Thread.Sleep(1000);
+            }
         }
     }
 }

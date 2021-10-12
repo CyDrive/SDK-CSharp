@@ -5,6 +5,7 @@
     <Authors>yah01</Authors>
     <Company>CyDrive</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

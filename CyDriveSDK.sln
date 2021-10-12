@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29920.165
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyDriveSDK", "CyDriveSDK.csproj", "{627181B0-1A4C-408E-BEE9-C723A201968B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CyDriveSDK", "CyDriveSDK.csproj", "{627181B0-1A4C-408E-BEE9-C723A201968B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CyDriveSDKTests", "..\CyDriveSDKTests\CyDriveSDKTests.csproj", "{F366F4D5-8D05-4556-BCB7-DB5CCBCBB1A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{627181B0-1A4C-408E-BEE9-C723A201968B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{627181B0-1A4C-408E-BEE9-C723A201968B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{627181B0-1A4C-408E-BEE9-C723A201968B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F366F4D5-8D05-4556-BCB7-DB5CCBCBB1A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F366F4D5-8D05-4556-BCB7-DB5CCBCBB1A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F366F4D5-8D05-4556-BCB7-DB5CCBCBB1A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F366F4D5-8D05-4556-BCB7-DB5CCBCBB1A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@ using System.Text.Json;
 namespace CyDrive
 {
 
-    static class Utils
+    public static class Utils
     {
         //public static async Task<FileInfo[]> ListLocalDirAsync(User User)
         //{
@@ -45,7 +45,7 @@ namespace CyDrive
         {
             int index = addr.LastIndexOf(':');
             var ipAddr = IPAddress.Parse(addr.Substring(0, index));
-            return new IPEndPoint(ipAddr, int.Parse(addr.Substring(index)));
+            return new IPEndPoint(ipAddr, int.Parse(addr.Substring(index + 1)));
         }
     }
 }
