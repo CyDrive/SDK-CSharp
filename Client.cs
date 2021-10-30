@@ -10,6 +10,7 @@ using System.Threading;
 using System.IO;
 using WebSocketSharp;
 using System.Net.Http;
+using System.ComponentModel;
 
 namespace CyDrive
 {
@@ -31,11 +32,7 @@ namespace CyDrive
             remove { messageClient.OnOpen -= value; }
         }
 
-        public event EventHandler<MessageEventArgs> OnMessage
-        {
-            add { messageClient.OnMessage += value; }
-            remove { messageClient.OnMessage -= value; }
-        }
+        public event EventHandler<MessageEventArgs> OnMessage;
 
         public event EventHandler<WebSocketSharp.ErrorEventArgs> OnError
         {
@@ -299,13 +296,50 @@ namespace CyDrive
         {
             messageClient.Connect();
 
+            messageClient.OnMessage += (sender, e) =>
+            {
+                var message = JsonParser.Default.Parse<Message>(e.Data);
+                OnRecvMessage(new MessageEventArgs { Message = message });
+            };
+
             return true;
         }
 
-        public async void SendMessage(Message message, Action<bool> OnCompleted)
+        protected virtual void OnRecvMessage(MessageEventArgs args)
+        {
+            OnMessage(this, args);
+        }
+
+        // You should fill the message with fields:
+        // receiver, type, content
+        private async void SendMessage(Message message, Action<bool> OnCompleted)
         {
             string messageString = JsonFormatter.Default.Format(message);
             messageClient.SendAsync(messageString, OnCompleted);
         }
+
+        public async void SendText(string text, int receiver, Action<bool> OnCompleted)
+        {
+            Message message = new Message()
+            {
+                Sender = DeviceId,
+                Receiver = receiver,
+                Type = MessageType.Text,
+                Content = text,
+                SendedAt = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.Now),
+            };
+
+            SendMessage(message, OnCompleted);
+        }
+    }
+
+    public class MessageEventArgs : EventArgs
+    {
+        public Message Message;
+    }
+
+    public class MessagePublisher
+    {
+
     }
 }
