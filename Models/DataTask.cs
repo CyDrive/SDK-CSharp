@@ -73,7 +73,7 @@ namespace CyDrive.Models
 
             // Open/Create file
             var fileMode = FileMode.OpenOrCreate;
-            using var fs = File.Open(LocalPath, fileMode);
+            var fs = File.Open(LocalPath, fileMode);
             fs.Seek(Offset, SeekOrigin.Begin);
             if (ShouldTruncate)
             {
@@ -97,6 +97,7 @@ namespace CyDrive.Models
                 Offset += readBytesCount;
             }
 
+            fs.Close();
             tcpClient.Close();
         }
 
@@ -105,7 +106,7 @@ namespace CyDrive.Models
             var stream = tcpClient.GetStream();
             var sendIdTask = SendIdAsync(stream);
 
-            using var fs = File.Open(LocalPath, FileMode.Open,FileAccess.Read);
+            var fs = File.Open(LocalPath, FileMode.Open,FileAccess.Read);
             fs.Seek(Offset, SeekOrigin.Begin);
 
             await sendIdTask;
@@ -125,6 +126,7 @@ namespace CyDrive.Models
                 Offset += readBytesCount;
             }
 
+            fs.Close();
             tcpClient.Close();
         }
 
@@ -143,7 +145,7 @@ namespace CyDrive.Models
             {
                 Array.Reverse(idBytes);
             }
-            await stream.WriteAsync(idBytes);
+            await stream.WriteAsync(idBytes,0,idBytes.Length);
         }
     }
 }

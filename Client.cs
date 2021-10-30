@@ -3,30 +3,61 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Net;
-using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using System.Threading;
 using System.IO;
+using WebSocketSharp;
+using System.Net.Http;
 
 namespace CyDrive
 {
     public class CyDriveClient
     {
+        private Uri baseAddr;
+        private CookieContainer cookies;
+        private WebSocket messageClient;
         private HttpClient client;
 
         public readonly string ServerAddr = "123.57.39.79:6454";
         public bool IsLogin { get; set; }
         public Account Account = new Account();
+        public readonly int DeviceId;
 
-        public CyDriveClient(string ServerAddr, Account account = null)
+        public event EventHandler OnOpen
+        {
+            add { messageClient.OnOpen += value; }
+            remove { messageClient.OnOpen -= value; }
+        }
+
+        public event EventHandler<MessageEventArgs> OnMessage
+        {
+            add { messageClient.OnMessage += value; }
+            remove { messageClient.OnMessage -= value; }
+        }
+
+        public event EventHandler<WebSocketSharp.ErrorEventArgs> OnError
+        {
+            add { messageClient.OnError += value; }
+            remove { messageClient.OnError -= value; }
+        }
+
+        public event EventHandler<CloseEventArgs> OnClose
+        {
+            add { messageClient.OnClose += value; }
+            remove { messageClient.OnClose -= value; }
+        }
+
+        public CyDriveClient(string serverAddr, int deviceId, Account account = null)
         {
             // Set up http client
-            var baseAddr = new Uri(string.Format("http://{0}", ServerAddr));
-            var cookieContainer = new CookieContainer();
-            var handler = new HttpClientHandler() { CookieContainer = cookieContainer };
+            baseAddr = new Uri(string.Format("http://{0}", serverAddr));
+            cookies = new CookieContainer();
+            var handler = new HttpClientHandler() { CookieContainer = cookies };
             client = new HttpClient(handler) { BaseAddress = baseAddr };
+            messageClient = new WebSocket($"ws://{serverAddr}/message_service?device_id={deviceId}");
+            DeviceId = deviceId;
 
             if (account != null)
             {
@@ -34,6 +65,7 @@ namespace CyDrive
             }
         }
 
+        // Account Service API
         public async Task<bool> RegisterAsync(Account account = null)
         {
             if (account != null)
@@ -97,10 +129,18 @@ namespace CyDrive
             var resp = JsonParser.Default.Parse<Response>(resBody);
 
             IsLogin = resp.StatusCode == StatusCode.Ok;
+            if (IsLogin)
+            {
+                foreach (Cookie cookie in cookies.GetCookies(baseAddr))
+                {
+                    messageClient.SetCookie(new WebSocketSharp.Net.Cookie(cookie.Name, cookie.Value));
+                }
+            }
 
             return IsLogin;
         }
 
+        // Storage Service API
         public async Task<Models.FileInfo[]> ListDirAsync(string path = "")
         {
             path = path.Replace('\\', '/');
@@ -242,18 +282,30 @@ namespace CyDrive
             return task;
         }
 
-        //public async Task<Resp> DeleteFileAsync(string path)
-        //{
-        //    var resp = await client.DeleteAsync("/file" + string.Format("/{0}", Uri.EscapeUriString(path)));
-        //    var resJson = await resp.Content.ReadAsStringAsync();
-        //    var res = JsonSerializer.Deserialize<Resp>(resJson);
+        public async Task<Models.FileInfo> DeleteFileAsync(string path)
+        {
+            var res = await client.DeleteAsync("/file" + string.Format("/{0}", Uri.EscapeUriString(path)));
+            var resBody = await res.Content.ReadAsStringAsync();
+            Console.WriteLine(resBody);
 
-        //    if (!res.IsStatusOK())
-        //    {
-        //        throw new Exception("Delete failed");
-        //    }
+            var resp = JsonParser.Default.Parse<Response>(resBody);
+            var deleteResp = JsonParser.Default.Parse<DeleteResponse>(resp.Data);
 
-        //    return res;
-        //}
+            return deleteResp.FileInfo;
+        }
+
+        // Message Service API
+        public async Task<bool> ConnectMessageService()
+        {
+            messageClient.Connect();
+
+            return true;
+        }
+
+        public async void SendMessage(Message message, Action<bool> OnCompleted)
+        {
+            string messageString = JsonFormatter.Default.Format(message);
+            messageClient.SendAsync(messageString, OnCompleted);
+        }
     }
 }

@@ -24,23 +24,26 @@ namespace CyDrive.Models {
     static HttpModelsReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Chhtb2RlbHMvaHR0cF9tb2RlbHMucHJvdG8SBm1vZGVscxoWbW9kZWxzL2Zp",
-            "bGVfaW5mby5wcm90bxoSY29uc3RzL2VudW1zLnByb3RvIlIKCFJlc3BvbnNl",
-            "EicKC3N0YXR1c19jb2RlGAEgASgOMhIuY29uc3RzLlN0YXR1c0NvZGUSDwoH",
-            "bWVzc2FnZRgCIAEoCRIMCgRkYXRhGAMgASgJIk0KD1JlZ2lzdGVyUmVxdWVz",
-            "dBINCgVlbWFpbBgBIAEoCRIQCghwYXNzd29yZBgCIAEoCRIMCgRuYW1lGAMg",
-            "ASgJEgsKA2NhcBgEIAEoAyIvCgxMb2dpblJlcXVlc3QSDQoFZW1haWwYASAB",
-            "KAkSEAoIcGFzc3dvcmQYAiABKAkiPwoTR2V0RmlsZUxpc3RSZXNwb25zZRIo",
-            "Cg5maWxlX2luZm9fbGlzdBgBIAMoCzIQLm1vZGVscy5GaWxlSW5mbyJbChBE",
-            "b3dubG9hZFJlc3BvbnNlEhEKCW5vZGVfYWRkchgBIAEoCRIPCgd0YXNrX2lk",
-            "GAIgASgFEiMKCWZpbGVfaW5mbxgDIAEoCzIQLm1vZGVscy5GaWxlSW5mbyJN",
-            "Cg1VcGxvYWRSZXF1ZXN0EiMKCWZpbGVfaW5mbxgBIAEoCzIQLm1vZGVscy5G",
-            "aWxlSW5mbxIXCg9zaG91bGRfdHJ1bmNhdGUYAiABKAgiRAoOVXBsb2FkUmVz",
-            "cG9uc2USEQoJbm9kZV9hZGRyGAEgASgJEg8KB3Rhc2tfaWQYAiABKAUSDgoG",
-            "b2Zmc2V0GAMgASgDQixaGWdpdGh1Yi5jb20vQ3lEcml2ZS9tb2RlbHOqAg5D",
-            "eURyaXZlLk1vZGVsc2IGcHJvdG8z"));
+            "Chhtb2RlbHMvaHR0cF9tb2RlbHMucHJvdG8SBm1vZGVscxoSY29uc3RzL2Vu",
+            "dW1zLnByb3RvGhZtb2RlbHMvZmlsZV9pbmZvLnByb3RvGhRtb2RlbHMvbWVz",
+            "c2FnZS5wcm90byJSCghSZXNwb25zZRInCgtzdGF0dXNfY29kZRgBIAEoDjIS",
+            "LmNvbnN0cy5TdGF0dXNDb2RlEg8KB21lc3NhZ2UYAiABKAkSDAoEZGF0YRgD",
+            "IAEoCSJNCg9SZWdpc3RlclJlcXVlc3QSDQoFZW1haWwYASABKAkSEAoIcGFz",
+            "c3dvcmQYAiABKAkSDAoEbmFtZRgDIAEoCRILCgNjYXAYBCABKAMiLwoMTG9n",
+            "aW5SZXF1ZXN0Eg0KBWVtYWlsGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJIj8K",
+            "E0dldEZpbGVMaXN0UmVzcG9uc2USKAoOZmlsZV9pbmZvX2xpc3QYASADKAsy",
+            "EC5tb2RlbHMuRmlsZUluZm8iWwoQRG93bmxvYWRSZXNwb25zZRIRCglub2Rl",
+            "X2FkZHIYASABKAkSDwoHdGFza19pZBgCIAEoBRIjCglmaWxlX2luZm8YAyAB",
+            "KAsyEC5tb2RlbHMuRmlsZUluZm8iTQoNVXBsb2FkUmVxdWVzdBIjCglmaWxl",
+            "X2luZm8YASABKAsyEC5tb2RlbHMuRmlsZUluZm8SFwoPc2hvdWxkX3RydW5j",
+            "YXRlGAIgASgIIkQKDlVwbG9hZFJlc3BvbnNlEhEKCW5vZGVfYWRkchgBIAEo",
+            "CRIPCgd0YXNrX2lkGAIgASgFEg4KBm9mZnNldBgDIAEoAyI1Cg5EZWxldGVS",
+            "ZXNwb25zZRIjCglmaWxlX2luZm8YASABKAsyEC5tb2RlbHMuRmlsZUluZm8i",
+            "NwoSR2V0TWVzc2FnZVJlc3BvbnNlEiEKCG1lc3NhZ2VzGAEgAygLMg8ubW9k",
+            "ZWxzLk1lc3NhZ2VCLFoZZ2l0aHViLmNvbS9DeURyaXZlL21vZGVsc6oCDkN5",
+            "RHJpdmUuTW9kZWxzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::CyDrive.Models.FileInfoReflection.Descriptor, global::CyDrive.EnumsReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::CyDrive.EnumsReflection.Descriptor, global::CyDrive.Models.FileInfoReflection.Descriptor, global::CyDrive.Models.MessageReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.Response), global::CyDrive.Models.Response.Parser, new[]{ "StatusCode", "Message", "Data" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.RegisterRequest), global::CyDrive.Models.RegisterRequest.Parser, new[]{ "Email", "Password", "Name", "Cap" }, null, null, null),
@@ -48,7 +51,9 @@ namespace CyDrive.Models {
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.GetFileListResponse), global::CyDrive.Models.GetFileListResponse.Parser, new[]{ "FileInfoList" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.DownloadResponse), global::CyDrive.Models.DownloadResponse.Parser, new[]{ "NodeAddr", "TaskId", "FileInfo" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.UploadRequest), global::CyDrive.Models.UploadRequest.Parser, new[]{ "FileInfo", "ShouldTruncate" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.UploadResponse), global::CyDrive.Models.UploadResponse.Parser, new[]{ "NodeAddr", "TaskId", "Offset" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.UploadResponse), global::CyDrive.Models.UploadResponse.Parser, new[]{ "NodeAddr", "TaskId", "Offset" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.DeleteResponse), global::CyDrive.Models.DeleteResponse.Parser, new[]{ "FileInfo" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.GetMessageResponse), global::CyDrive.Models.GetMessageResponse.Parser, new[]{ "Messages" }, null, null, null)
           }));
     }
     #endregion
@@ -1268,6 +1273,262 @@ namespace CyDrive.Models {
           }
           case 24: {
             Offset = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class DeleteResponse : pb::IMessage<DeleteResponse> {
+    private static readonly pb::MessageParser<DeleteResponse> _parser = new pb::MessageParser<DeleteResponse>(() => new DeleteResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<DeleteResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::CyDrive.Models.HttpModelsReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteResponse(DeleteResponse other) : this() {
+      fileInfo_ = other.fileInfo_ != null ? other.fileInfo_.Clone() : null;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public DeleteResponse Clone() {
+      return new DeleteResponse(this);
+    }
+
+    /// <summary>Field number for the "file_info" field.</summary>
+    public const int FileInfoFieldNumber = 1;
+    private global::CyDrive.Models.FileInfo fileInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::CyDrive.Models.FileInfo FileInfo {
+      get { return fileInfo_; }
+      set {
+        fileInfo_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as DeleteResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(DeleteResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (!object.Equals(FileInfo, other.FileInfo)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (fileInfo_ != null) hash ^= FileInfo.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (fileInfo_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(FileInfo);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (fileInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(FileInfo);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(DeleteResponse other) {
+      if (other == null) {
+        return;
+      }
+      if (other.fileInfo_ != null) {
+        if (fileInfo_ == null) {
+          fileInfo_ = new global::CyDrive.Models.FileInfo();
+        }
+        FileInfo.MergeFrom(other.FileInfo);
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            if (fileInfo_ == null) {
+              fileInfo_ = new global::CyDrive.Models.FileInfo();
+            }
+            input.ReadMessage(fileInfo_);
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public sealed partial class GetMessageResponse : pb::IMessage<GetMessageResponse> {
+    private static readonly pb::MessageParser<GetMessageResponse> _parser = new pb::MessageParser<GetMessageResponse>(() => new GetMessageResponse());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<GetMessageResponse> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::CyDrive.Models.HttpModelsReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessageResponse() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessageResponse(GetMessageResponse other) : this() {
+      messages_ = other.messages_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public GetMessageResponse Clone() {
+      return new GetMessageResponse(this);
+    }
+
+    /// <summary>Field number for the "messages" field.</summary>
+    public const int MessagesFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::CyDrive.Models.Message> _repeated_messages_codec
+        = pb::FieldCodec.ForMessage(10, global::CyDrive.Models.Message.Parser);
+    private readonly pbc::RepeatedField<global::CyDrive.Models.Message> messages_ = new pbc::RepeatedField<global::CyDrive.Models.Message>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::CyDrive.Models.Message> Messages {
+      get { return messages_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as GetMessageResponse);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(GetMessageResponse other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!messages_.Equals(other.messages_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= messages_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      messages_.WriteTo(output, _repeated_messages_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += messages_.CalculateSize(_repeated_messages_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(GetMessageResponse other) {
+      if (other == null) {
+        return;
+      }
+      messages_.Add(other.messages_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            messages_.AddEntriesFrom(input, _repeated_messages_codec);
             break;
           }
         }

@@ -25,13 +25,12 @@ namespace CyDrive.Models {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChRtb2RlbHMvbWVzc2FnZS5wcm90bxIGbW9kZWxzGh9nb29nbGUvcHJvdG9i",
-            "dWYvdGltZXN0YW1wLnByb3RvGhJjb25zdHMvZW51bXMucHJvdG8aEm9wdGlv",
-            "bnMvZ29ybS5wcm90byK8AQoHTWVzc2FnZRIUCgJpZBgBIAEoA0IIurkZBAoC",
-            "KAESDgoGc2VuZGVyGAIgASgFEhAKCHJlY2VpdmVyGAMgASgFEiEKBHR5cGUY",
-            "BCABKA4yEy5jb25zdHMuTWVzc2FnZVR5cGUSDwoHY29udGVudBgFIAEoCRIt",
-            "CglzZW5kZWRfYXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1w",
-            "Eg4KBkV4cGlyZRgHIAEoBToGurkZAggBQixaGWdpdGh1Yi5jb20vQ3lEcml2",
-            "ZS9tb2RlbHOqAg5DeURyaXZlLk1vZGVsc2IGcHJvdG8z"));
+            "dWYvdGltZXN0YW1wLnByb3RvGhJjb25zdHMvZW51bXMucHJvdG8iqgEKB01l",
+            "c3NhZ2USCgoCaWQYASABKAMSDgoGc2VuZGVyGAIgASgFEhAKCHJlY2VpdmVy",
+            "GAMgASgFEiEKBHR5cGUYBCABKA4yEy5jb25zdHMuTWVzc2FnZVR5cGUSDwoH",
+            "Y29udGVudBgFIAEoCRItCglzZW5kZWRfYXQYBiABKAsyGi5nb29nbGUucHJv",
+            "dG9idWYuVGltZXN0YW1wEg4KBkV4cGlyZRgHIAEoBUIsWhlnaXRodWIuY29t",
+            "L0N5RHJpdmUvbW9kZWxzqgIOQ3lEcml2ZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::CyDrive.EnumsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
