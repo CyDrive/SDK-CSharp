@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using System.Net;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using System.Threading;
@@ -132,6 +131,8 @@ namespace CyDrive
                 {
                     messageClient.SetCookie(new WebSocketSharp.Net.Cookie(cookie.Name, cookie.Value));
                 }
+                var safeAccount = JsonParser.Default.Parse<SafeAccount>(resp.Data);
+                updateAccount(ref Account, safeAccount);
             }
 
             return IsLogin;
@@ -330,6 +331,15 @@ namespace CyDrive
             };
 
             SendMessage(message, OnCompleted);
+        }
+
+        private void updateAccount(ref Account account, SafeAccount safeAccount)
+        {
+            account.Id = safeAccount.Id;
+            account.Email = safeAccount.Email;
+            account.Name = safeAccount.Name;
+            account.Usage = safeAccount.Usage;
+            account.Cap = safeAccount.Cap;
         }
     }
 
