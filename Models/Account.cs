@@ -25,47 +25,52 @@ namespace CyDrive.Models {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChRtb2RlbHMvYWNjb3VudC5wcm90bxIGbW9kZWxzGh9nb29nbGUvcHJvdG9i",
-            "dWYvdGltZXN0YW1wLnByb3RvGhJvcHRpb25zL2dvcm0ucHJvdG8iUgoLU2Fm",
-            "ZUFjY291bnQSCgoCaWQYASABKAUSDQoFZW1haWwYAiABKAkSDAoEbmFtZRgD",
-            "IAEoCRINCgV1c2FnZRgEIAEoAxILCgNjYXAYBSABKAMiiAIKB0FjY291bnQS",
-            "FAoCaWQYASABKAVCCLq5GQQKAigBEhkKBWVtYWlsGAIgASgJQgq6uRkGCgQw",
-            "AUABEhYKBG5hbWUYAyABKAlCCLq5GQQKAkABEhgKBXVzYWdlGAQgASgDQgm6",
-            "uRkFCgM6ATASFgoDY2FwGAUgASgDQgm6uRkFCgM6ATASGgoIcGFzc3dvcmQY",
-            "BiABKAlCCLq5GQQKAkABEi4KCmNyZWF0ZWRfYXQYByABKAsyGi5nb29nbGUu",
-            "cHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYCCABKAsyGi5nb29n",
-            "bGUucHJvdG9idWYuVGltZXN0YW1wOga6uRkCCAEiNAoLQWNjb3VudExpc3QS",
-            "JQoMYWNjb3VudF9saXN0GAEgAygLMg8ubW9kZWxzLkFjY291bnRCLFoZZ2l0",
-            "aHViLmNvbS9DeURyaXZlL21vZGVsc6oCDkN5RHJpdmUuTW9kZWxzYgZwcm90",
-            "bzM="));
+            "dWYvdGltZXN0YW1wLnByb3RvIlIKC1NhZmVBY2NvdW50EgoKAmlkGAEgASgF",
+            "Eg0KBWVtYWlsGAIgASgJEgwKBG5hbWUYAyABKAkSDQoFdXNhZ2UYBCABKAMS",
+            "CwoDY2FwGAUgASgDIsABCgdBY2NvdW50EgoKAmlkGAEgASgFEg0KBWVtYWls",
+            "GAIgASgJEgwKBG5hbWUYAyABKAkSDQoFdXNhZ2UYBCABKAMSCwoDY2FwGAUg",
+            "ASgDEhAKCHBhc3N3b3JkGAYgASgJEi4KCmNyZWF0ZWRfYXQYByABKAsyGi5n",
+            "b29nbGUucHJvdG9idWYuVGltZXN0YW1wEi4KCnVwZGF0ZWRfYXQYCCABKAsy",
+            "Gi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIjQKC0FjY291bnRMaXN0EiUK",
+            "DGFjY291bnRfbGlzdBgBIAMoCzIPLm1vZGVscy5BY2NvdW50QixaGWdpdGh1",
+            "Yi5jb20vQ3lEcml2ZS9tb2RlbHOqAg5DeURyaXZlLk1vZGVsc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.SafeAccount), global::CyDrive.Models.SafeAccount.Parser, new[]{ "Id", "Email", "Name", "Usage", "Cap" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.Account), global::CyDrive.Models.Account.Parser, new[]{ "Id", "Email", "Name", "Usage", "Cap", "Password", "CreatedAt", "UpdatedAt" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.AccountList), global::CyDrive.Models.AccountList.Parser, new[]{ "AccountList_" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.SafeAccount), global::CyDrive.Models.SafeAccount.Parser, new[]{ "Id", "Email", "Name", "Usage", "Cap" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.Account), global::CyDrive.Models.Account.Parser, new[]{ "Id", "Email", "Name", "Usage", "Cap", "Password", "CreatedAt", "UpdatedAt" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.AccountList), global::CyDrive.Models.AccountList.Parser, new[]{ "AccountList_" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class SafeAccount : pb::IMessage<SafeAccount> {
+  public sealed partial class SafeAccount : pb::IMessage<SafeAccount>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<SafeAccount> _parser = new pb::MessageParser<SafeAccount>(() => new SafeAccount());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<SafeAccount> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::CyDrive.Models.AccountReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SafeAccount() {
       OnConstruction();
     }
@@ -73,6 +78,7 @@ namespace CyDrive.Models {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SafeAccount(SafeAccount other) : this() {
       id_ = other.id_;
       email_ = other.email_;
@@ -83,6 +89,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public SafeAccount Clone() {
       return new SafeAccount(this);
     }
@@ -91,6 +98,7 @@ namespace CyDrive.Models {
     public const int IdFieldNumber = 1;
     private int id_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Id {
       get { return id_; }
       set {
@@ -102,6 +110,7 @@ namespace CyDrive.Models {
     public const int EmailFieldNumber = 2;
     private string email_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Email {
       get { return email_; }
       set {
@@ -113,6 +122,7 @@ namespace CyDrive.Models {
     public const int NameFieldNumber = 3;
     private string name_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Name {
       get { return name_; }
       set {
@@ -124,6 +134,7 @@ namespace CyDrive.Models {
     public const int UsageFieldNumber = 4;
     private long usage_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Usage {
       get { return usage_; }
       set {
@@ -135,6 +146,7 @@ namespace CyDrive.Models {
     public const int CapFieldNumber = 5;
     private long cap_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Cap {
       get { return cap_; }
       set {
@@ -143,11 +155,13 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as SafeAccount);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(SafeAccount other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -164,6 +178,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
@@ -178,12 +193,17 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Id != 0) {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
@@ -207,9 +227,41 @@ namespace CyDrive.Models {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
 
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (Email.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Email);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
+      if (Usage != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(Usage);
+      }
+      if (Cap != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Cap);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (Id != 0) {
@@ -234,6 +286,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(SafeAccount other) {
       if (other == null) {
         return;
@@ -257,7 +310,11 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -286,27 +343,71 @@ namespace CyDrive.Models {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Email = input.ReadString();
+            break;
+          }
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 32: {
+            Usage = input.ReadInt64();
+            break;
+          }
+          case 40: {
+            Cap = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
-  public sealed partial class Account : pb::IMessage<Account> {
+  public sealed partial class Account : pb::IMessage<Account>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Account> _parser = new pb::MessageParser<Account>(() => new Account());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<Account> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::CyDrive.Models.AccountReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Account() {
       OnConstruction();
     }
@@ -314,6 +415,7 @@ namespace CyDrive.Models {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Account(Account other) : this() {
       id_ = other.id_;
       email_ = other.email_;
@@ -327,6 +429,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Account Clone() {
       return new Account(this);
     }
@@ -338,6 +441,7 @@ namespace CyDrive.Models {
     /// Safe part
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Id {
       get { return id_; }
       set {
@@ -349,6 +453,7 @@ namespace CyDrive.Models {
     public const int EmailFieldNumber = 2;
     private string email_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Email {
       get { return email_; }
       set {
@@ -360,6 +465,7 @@ namespace CyDrive.Models {
     public const int NameFieldNumber = 3;
     private string name_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Name {
       get { return name_; }
       set {
@@ -371,6 +477,7 @@ namespace CyDrive.Models {
     public const int UsageFieldNumber = 4;
     private long usage_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Usage {
       get { return usage_; }
       set {
@@ -382,6 +489,7 @@ namespace CyDrive.Models {
     public const int CapFieldNumber = 5;
     private long cap_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Cap {
       get { return cap_; }
       set {
@@ -393,6 +501,7 @@ namespace CyDrive.Models {
     public const int PasswordFieldNumber = 6;
     private string password_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Password {
       get { return password_; }
       set {
@@ -404,6 +513,7 @@ namespace CyDrive.Models {
     public const int CreatedAtFieldNumber = 7;
     private global::Google.Protobuf.WellKnownTypes.Timestamp createdAt_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp CreatedAt {
       get { return createdAt_; }
       set {
@@ -415,6 +525,7 @@ namespace CyDrive.Models {
     public const int UpdatedAtFieldNumber = 8;
     private global::Google.Protobuf.WellKnownTypes.Timestamp updatedAt_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp UpdatedAt {
       get { return updatedAt_; }
       set {
@@ -423,11 +534,13 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as Account);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(Account other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -447,6 +560,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0) hash ^= Id.GetHashCode();
@@ -464,12 +578,17 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Id != 0) {
         output.WriteRawTag(8);
         output.WriteInt32(Id);
@@ -505,9 +624,53 @@ namespace CyDrive.Models {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
 
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Id);
+      }
+      if (Email.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Email);
+      }
+      if (Name.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Name);
+      }
+      if (Usage != 0L) {
+        output.WriteRawTag(32);
+        output.WriteInt64(Usage);
+      }
+      if (Cap != 0L) {
+        output.WriteRawTag(40);
+        output.WriteInt64(Cap);
+      }
+      if (Password.Length != 0) {
+        output.WriteRawTag(50);
+        output.WriteString(Password);
+      }
+      if (createdAt_ != null) {
+        output.WriteRawTag(58);
+        output.WriteMessage(CreatedAt);
+      }
+      if (updatedAt_ != null) {
+        output.WriteRawTag(66);
+        output.WriteMessage(UpdatedAt);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (Id != 0) {
@@ -541,6 +704,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(Account other) {
       if (other == null) {
         return;
@@ -565,13 +729,13 @@ namespace CyDrive.Models {
       }
       if (other.createdAt_ != null) {
         if (createdAt_ == null) {
-          createdAt_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+          CreatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
         }
         CreatedAt.MergeFrom(other.CreatedAt);
       }
       if (other.updatedAt_ != null) {
         if (updatedAt_ == null) {
-          updatedAt_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+          UpdatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
         }
         UpdatedAt.MergeFrom(other.UpdatedAt);
       }
@@ -579,7 +743,11 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -612,41 +780,103 @@ namespace CyDrive.Models {
           }
           case 58: {
             if (createdAt_ == null) {
-              createdAt_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+              CreatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(createdAt_);
+            input.ReadMessage(CreatedAt);
             break;
           }
           case 66: {
             if (updatedAt_ == null) {
-              updatedAt_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+              UpdatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(updatedAt_);
+            input.ReadMessage(UpdatedAt);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            Email = input.ReadString();
+            break;
+          }
+          case 26: {
+            Name = input.ReadString();
+            break;
+          }
+          case 32: {
+            Usage = input.ReadInt64();
+            break;
+          }
+          case 40: {
+            Cap = input.ReadInt64();
+            break;
+          }
+          case 50: {
+            Password = input.ReadString();
+            break;
+          }
+          case 58: {
+            if (createdAt_ == null) {
+              CreatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(CreatedAt);
+            break;
+          }
+          case 66: {
+            if (updatedAt_ == null) {
+              UpdatedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(UpdatedAt);
             break;
           }
         }
       }
     }
+    #endif
 
   }
 
-  public sealed partial class AccountList : pb::IMessage<AccountList> {
+  public sealed partial class AccountList : pb::IMessage<AccountList>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<AccountList> _parser = new pb::MessageParser<AccountList>(() => new AccountList());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<AccountList> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::CyDrive.Models.AccountReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AccountList() {
       OnConstruction();
     }
@@ -654,12 +884,14 @@ namespace CyDrive.Models {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AccountList(AccountList other) : this() {
       accountList_ = other.accountList_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public AccountList Clone() {
       return new AccountList(this);
     }
@@ -670,16 +902,19 @@ namespace CyDrive.Models {
         = pb::FieldCodec.ForMessage(10, global::CyDrive.Models.Account.Parser);
     private readonly pbc::RepeatedField<global::CyDrive.Models.Account> accountList_ = new pbc::RepeatedField<global::CyDrive.Models.Account>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<global::CyDrive.Models.Account> AccountList_ {
       get { return accountList_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as AccountList);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(AccountList other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -692,6 +927,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       hash ^= accountList_.GetHashCode();
@@ -702,19 +938,37 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       accountList_.WriteTo(output, _repeated_accountList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
 
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      accountList_.WriteTo(ref output, _repeated_accountList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       size += accountList_.CalculateSize(_repeated_accountList_codec);
@@ -725,6 +979,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(AccountList other) {
       if (other == null) {
         return;
@@ -734,7 +989,11 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -747,7 +1006,27 @@ namespace CyDrive.Models {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            accountList_.AddEntriesFrom(ref input, _repeated_accountList_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 

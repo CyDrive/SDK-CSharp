@@ -29,35 +29,43 @@ namespace CyDrive.Models {
             "c3NhZ2USCgoCaWQYASABKAMSDgoGc2VuZGVyGAIgASgFEhAKCHJlY2VpdmVy",
             "GAMgASgFEiEKBHR5cGUYBCABKA4yEy5jb25zdHMuTWVzc2FnZVR5cGUSDwoH",
             "Y29udGVudBgFIAEoCRItCglzZW5kZWRfYXQYBiABKAsyGi5nb29nbGUucHJv",
-            "dG9idWYuVGltZXN0YW1wEg4KBkV4cGlyZRgHIAEoBUIsWhlnaXRodWIuY29t",
+            "dG9idWYuVGltZXN0YW1wEg4KBmV4cGlyZRgHIAEoBUIsWhlnaXRodWIuY29t",
             "L0N5RHJpdmUvbW9kZWxzqgIOQ3lEcml2ZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::CyDrive.EnumsReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.Message), global::CyDrive.Models.Message.Parser, new[]{ "Id", "Sender", "Receiver", "Type", "Content", "SendedAt", "Expire" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.Message), global::CyDrive.Models.Message.Parser, new[]{ "Id", "Sender", "Receiver", "Type", "Content", "SendedAt", "Expire" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class Message : pb::IMessage<Message> {
+  public sealed partial class Message : pb::IMessage<Message>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<Message> _parser = new pb::MessageParser<Message>(() => new Message());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<Message> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::CyDrive.Models.MessageReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Message() {
       OnConstruction();
     }
@@ -65,6 +73,7 @@ namespace CyDrive.Models {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Message(Message other) : this() {
       id_ = other.id_;
       sender_ = other.sender_;
@@ -77,6 +86,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Message Clone() {
       return new Message(this);
     }
@@ -85,6 +95,7 @@ namespace CyDrive.Models {
     public const int IdFieldNumber = 1;
     private long id_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Id {
       get { return id_; }
       set {
@@ -96,6 +107,7 @@ namespace CyDrive.Models {
     public const int SenderFieldNumber = 2;
     private int sender_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Sender {
       get { return sender_; }
       set {
@@ -107,6 +119,7 @@ namespace CyDrive.Models {
     public const int ReceiverFieldNumber = 3;
     private int receiver_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Receiver {
       get { return receiver_; }
       set {
@@ -116,8 +129,9 @@ namespace CyDrive.Models {
 
     /// <summary>Field number for the "type" field.</summary>
     public const int TypeFieldNumber = 4;
-    private global::CyDrive.MessageType type_ = 0;
+    private global::CyDrive.MessageType type_ = global::CyDrive.MessageType.Text;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::CyDrive.MessageType Type {
       get { return type_; }
       set {
@@ -129,6 +143,7 @@ namespace CyDrive.Models {
     public const int ContentFieldNumber = 5;
     private string content_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string Content {
       get { return content_; }
       set {
@@ -140,6 +155,7 @@ namespace CyDrive.Models {
     public const int SendedAtFieldNumber = 6;
     private global::Google.Protobuf.WellKnownTypes.Timestamp sendedAt_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp SendedAt {
       get { return sendedAt_; }
       set {
@@ -147,10 +163,11 @@ namespace CyDrive.Models {
       }
     }
 
-    /// <summary>Field number for the "Expire" field.</summary>
+    /// <summary>Field number for the "expire" field.</summary>
     public const int ExpireFieldNumber = 7;
     private int expire_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int Expire {
       get { return expire_; }
       set {
@@ -159,11 +176,13 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as Message);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(Message other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -182,12 +201,13 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
       if (Sender != 0) hash ^= Sender.GetHashCode();
       if (Receiver != 0) hash ^= Receiver.GetHashCode();
-      if (Type != 0) hash ^= Type.GetHashCode();
+      if (Type != global::CyDrive.MessageType.Text) hash ^= Type.GetHashCode();
       if (Content.Length != 0) hash ^= Content.GetHashCode();
       if (sendedAt_ != null) hash ^= SendedAt.GetHashCode();
       if (Expire != 0) hash ^= Expire.GetHashCode();
@@ -198,12 +218,17 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (Id != 0L) {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
@@ -216,7 +241,7 @@ namespace CyDrive.Models {
         output.WriteRawTag(24);
         output.WriteInt32(Receiver);
       }
-      if (Type != 0) {
+      if (Type != global::CyDrive.MessageType.Text) {
         output.WriteRawTag(32);
         output.WriteEnum((int) Type);
       }
@@ -235,9 +260,49 @@ namespace CyDrive.Models {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
 
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (Sender != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Sender);
+      }
+      if (Receiver != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(Receiver);
+      }
+      if (Type != global::CyDrive.MessageType.Text) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) Type);
+      }
+      if (Content.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(Content);
+      }
+      if (sendedAt_ != null) {
+        output.WriteRawTag(50);
+        output.WriteMessage(SendedAt);
+      }
+      if (Expire != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Expire);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (Id != 0L) {
@@ -249,7 +314,7 @@ namespace CyDrive.Models {
       if (Receiver != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Receiver);
       }
-      if (Type != 0) {
+      if (Type != global::CyDrive.MessageType.Text) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
       }
       if (Content.Length != 0) {
@@ -268,6 +333,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(Message other) {
       if (other == null) {
         return;
@@ -281,7 +347,7 @@ namespace CyDrive.Models {
       if (other.Receiver != 0) {
         Receiver = other.Receiver;
       }
-      if (other.Type != 0) {
+      if (other.Type != global::CyDrive.MessageType.Text) {
         Type = other.Type;
       }
       if (other.Content.Length != 0) {
@@ -289,7 +355,7 @@ namespace CyDrive.Models {
       }
       if (other.sendedAt_ != null) {
         if (sendedAt_ == null) {
-          sendedAt_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+          SendedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
         }
         SendedAt.MergeFrom(other.SendedAt);
       }
@@ -300,7 +366,11 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -320,7 +390,7 @@ namespace CyDrive.Models {
             break;
           }
           case 32: {
-            type_ = (global::CyDrive.MessageType) input.ReadEnum();
+            Type = (global::CyDrive.MessageType) input.ReadEnum();
             break;
           }
           case 42: {
@@ -329,9 +399,55 @@ namespace CyDrive.Models {
           }
           case 50: {
             if (sendedAt_ == null) {
-              sendedAt_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+              SendedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(sendedAt_);
+            input.ReadMessage(SendedAt);
+            break;
+          }
+          case 56: {
+            Expire = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Sender = input.ReadInt32();
+            break;
+          }
+          case 24: {
+            Receiver = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            Type = (global::CyDrive.MessageType) input.ReadEnum();
+            break;
+          }
+          case 42: {
+            Content = input.ReadString();
+            break;
+          }
+          case 50: {
+            if (sendedAt_ == null) {
+              SendedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(SendedAt);
             break;
           }
           case 56: {
@@ -341,6 +457,7 @@ namespace CyDrive.Models {
         }
       }
     }
+    #endif
 
   }
 

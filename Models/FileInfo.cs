@@ -33,32 +33,40 @@ namespace CyDrive.Models {
             "bS9DeURyaXZlL21vZGVsc6oCDkN5RHJpdmUuTW9kZWxzYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.FileInfo), global::CyDrive.Models.FileInfo.Parser, new[]{ "FilePath", "Size", "ModifyTime", "IsDir", "IsCompressed" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.FileInfoList), global::CyDrive.Models.FileInfoList.Parser, new[]{ "FileInfoList_" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.FileInfo), global::CyDrive.Models.FileInfo.Parser, new[]{ "FilePath", "Size", "ModifyTime", "IsDir", "IsCompressed" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.FileInfoList), global::CyDrive.Models.FileInfoList.Parser, new[]{ "FileInfoList_" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class FileInfo : pb::IMessage<FileInfo> {
+  public sealed partial class FileInfo : pb::IMessage<FileInfo>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<FileInfo> _parser = new pb::MessageParser<FileInfo>(() => new FileInfo());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<FileInfo> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::CyDrive.Models.FileInfoReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FileInfo() {
       OnConstruction();
     }
@@ -66,6 +74,7 @@ namespace CyDrive.Models {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FileInfo(FileInfo other) : this() {
       filePath_ = other.filePath_;
       size_ = other.size_;
@@ -76,6 +85,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FileInfo Clone() {
       return new FileInfo(this);
     }
@@ -84,6 +94,7 @@ namespace CyDrive.Models {
     public const int FilePathFieldNumber = 1;
     private string filePath_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public string FilePath {
       get { return filePath_; }
       set {
@@ -95,6 +106,7 @@ namespace CyDrive.Models {
     public const int SizeFieldNumber = 2;
     private long size_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public long Size {
       get { return size_; }
       set {
@@ -106,6 +118,7 @@ namespace CyDrive.Models {
     public const int ModifyTimeFieldNumber = 3;
     private global::Google.Protobuf.WellKnownTypes.Timestamp modifyTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Google.Protobuf.WellKnownTypes.Timestamp ModifyTime {
       get { return modifyTime_; }
       set {
@@ -117,6 +130,7 @@ namespace CyDrive.Models {
     public const int IsDirFieldNumber = 4;
     private bool isDir_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IsDir {
       get { return isDir_; }
       set {
@@ -128,6 +142,7 @@ namespace CyDrive.Models {
     public const int IsCompressedFieldNumber = 5;
     private bool isCompressed_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool IsCompressed {
       get { return isCompressed_; }
       set {
@@ -136,11 +151,13 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as FileInfo);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(FileInfo other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -157,6 +174,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       if (FilePath.Length != 0) hash ^= FilePath.GetHashCode();
@@ -171,12 +189,17 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       if (FilePath.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(FilePath);
@@ -200,9 +223,41 @@ namespace CyDrive.Models {
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
 
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (FilePath.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(FilePath);
+      }
+      if (Size != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(Size);
+      }
+      if (modifyTime_ != null) {
+        output.WriteRawTag(26);
+        output.WriteMessage(ModifyTime);
+      }
+      if (IsDir != false) {
+        output.WriteRawTag(32);
+        output.WriteBool(IsDir);
+      }
+      if (IsCompressed != false) {
+        output.WriteRawTag(40);
+        output.WriteBool(IsCompressed);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       if (FilePath.Length != 0) {
@@ -227,6 +282,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(FileInfo other) {
       if (other == null) {
         return;
@@ -239,7 +295,7 @@ namespace CyDrive.Models {
       }
       if (other.modifyTime_ != null) {
         if (modifyTime_ == null) {
-          modifyTime_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+          ModifyTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
         }
         ModifyTime.MergeFrom(other.ModifyTime);
       }
@@ -253,7 +309,11 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -270,9 +330,47 @@ namespace CyDrive.Models {
           }
           case 26: {
             if (modifyTime_ == null) {
-              modifyTime_ = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+              ModifyTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
-            input.ReadMessage(modifyTime_);
+            input.ReadMessage(ModifyTime);
+            break;
+          }
+          case 32: {
+            IsDir = input.ReadBool();
+            break;
+          }
+          case 40: {
+            IsCompressed = input.ReadBool();
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            FilePath = input.ReadString();
+            break;
+          }
+          case 16: {
+            Size = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            if (modifyTime_ == null) {
+              ModifyTime = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+            }
+            input.ReadMessage(ModifyTime);
             break;
           }
           case 32: {
@@ -286,26 +384,35 @@ namespace CyDrive.Models {
         }
       }
     }
+    #endif
 
   }
 
-  public sealed partial class FileInfoList : pb::IMessage<FileInfoList> {
+  public sealed partial class FileInfoList : pb::IMessage<FileInfoList>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
     private static readonly pb::MessageParser<FileInfoList> _parser = new pb::MessageParser<FileInfoList>(() => new FileInfoList());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pb::MessageParser<FileInfoList> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::CyDrive.Models.FileInfoReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FileInfoList() {
       OnConstruction();
     }
@@ -313,12 +420,14 @@ namespace CyDrive.Models {
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FileInfoList(FileInfoList other) : this() {
       fileInfoList_ = other.fileInfoList_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FileInfoList Clone() {
       return new FileInfoList(this);
     }
@@ -329,16 +438,19 @@ namespace CyDrive.Models {
         = pb::FieldCodec.ForMessage(10, global::CyDrive.Models.FileInfo.Parser);
     private readonly pbc::RepeatedField<global::CyDrive.Models.FileInfo> fileInfoList_ = new pbc::RepeatedField<global::CyDrive.Models.FileInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::RepeatedField<global::CyDrive.Models.FileInfo> FileInfoList_ {
       get { return fileInfoList_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
       return Equals(other as FileInfoList);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public bool Equals(FileInfoList other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -351,6 +463,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
       hash ^= fileInfoList_.GetHashCode();
@@ -361,19 +474,37 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
       fileInfoList_.WriteTo(output, _repeated_fileInfoList_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
+    #endif
     }
 
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      fileInfoList_.WriteTo(ref output, _repeated_fileInfoList_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
       size += fileInfoList_.CalculateSize(_repeated_fileInfoList_codec);
@@ -384,6 +515,7 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(FileInfoList other) {
       if (other == null) {
         return;
@@ -393,7 +525,11 @@ namespace CyDrive.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
@@ -406,7 +542,27 @@ namespace CyDrive.Models {
           }
         }
       }
+    #endif
     }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            fileInfoList_.AddEntriesFrom(ref input, _repeated_fileInfoList_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
 
   }
 
