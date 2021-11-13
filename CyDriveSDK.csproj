@@ -5,13 +5,14 @@
 		<Authors>yah01</Authors>
 		<Company>CyDrive</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<VersionPrefix>1.5.3</VersionPrefix>
+		<VersionPrefix>1.6.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Version>$(VersionPrefix)$(VersionSuffix)</Version>
 		<PackageProjectUrl>https://github.com/WHU-CyDrive/CyDriveSDK</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="DeviceId" Version="6.0.0" />
 		<PackageReference Include="Google.Protobuf" Version="3.19.0" />
 		<PackageReference Include="System.Text.Json" Version="5.0.2" />
 		<PackageReference Include="WebSocketSharp" Version="1.0.3-rc11" />

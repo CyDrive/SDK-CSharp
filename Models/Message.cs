@@ -25,16 +25,17 @@ namespace CyDrive.Models {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChRtb2RlbHMvbWVzc2FnZS5wcm90bxIGbW9kZWxzGh9nb29nbGUvcHJvdG9i",
-            "dWYvdGltZXN0YW1wLnByb3RvGhJjb25zdHMvZW51bXMucHJvdG8iqgEKB01l",
-            "c3NhZ2USCgoCaWQYASABKAMSDgoGc2VuZGVyGAIgASgFEhAKCHJlY2VpdmVy",
-            "GAMgASgFEiEKBHR5cGUYBCABKA4yEy5jb25zdHMuTWVzc2FnZVR5cGUSDwoH",
-            "Y29udGVudBgFIAEoCRItCglzZW5kZWRfYXQYBiABKAsyGi5nb29nbGUucHJv",
-            "dG9idWYuVGltZXN0YW1wEg4KBmV4cGlyZRgHIAEoBUIsWhlnaXRodWIuY29t",
-            "L0N5RHJpdmUvbW9kZWxzqgIOQ3lEcml2ZS5Nb2RlbHNiBnByb3RvMw=="));
+            "dWYvdGltZXN0YW1wLnByb3RvGhJjb25zdHMvZW51bXMucHJvdG8ivwEKB01l",
+            "c3NhZ2USCgoCaWQYASABKAMSDgoGc2VuZGVyGAIgASgJEhMKC3NlbmRlcl9u",
+            "YW1lGAMgASgJEhAKCHJlY2VpdmVyGAQgASgJEiEKBHR5cGUYBSABKA4yEy5j",
+            "b25zdHMuTWVzc2FnZVR5cGUSDwoHY29udGVudBgGIAEoCRItCglzZW5kZWRf",
+            "YXQYByABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEg4KBmV4cGly",
+            "ZRgIIAEoBUIsWhlnaXRodWIuY29tL0N5RHJpdmUvbW9kZWxzqgIOQ3lEcml2",
+            "ZS5Nb2RlbHNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, global::CyDrive.EnumsReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.Message), global::CyDrive.Models.Message.Parser, new[]{ "Id", "Sender", "Receiver", "Type", "Content", "SendedAt", "Expire" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::CyDrive.Models.Message), global::CyDrive.Models.Message.Parser, new[]{ "Id", "Sender", "SenderName", "Receiver", "Type", "Content", "SendedAt", "Expire" }, null, null, null, null)
           }));
     }
     #endregion
@@ -77,6 +78,7 @@ namespace CyDrive.Models {
     public Message(Message other) : this() {
       id_ = other.id_;
       sender_ = other.sender_;
+      senderName_ = other.senderName_;
       receiver_ = other.receiver_;
       type_ = other.type_;
       content_ = other.content_;
@@ -105,30 +107,42 @@ namespace CyDrive.Models {
 
     /// <summary>Field number for the "sender" field.</summary>
     public const int SenderFieldNumber = 2;
-    private int sender_;
+    private string sender_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Sender {
+    public string Sender {
       get { return sender_; }
       set {
-        sender_ = value;
+        sender_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "sender_name" field.</summary>
+    public const int SenderNameFieldNumber = 3;
+    private string senderName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string SenderName {
+      get { return senderName_; }
+      set {
+        senderName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "receiver" field.</summary>
-    public const int ReceiverFieldNumber = 3;
-    private int receiver_;
+    public const int ReceiverFieldNumber = 4;
+    private string receiver_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Receiver {
+    public string Receiver {
       get { return receiver_; }
       set {
-        receiver_ = value;
+        receiver_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "type" field.</summary>
-    public const int TypeFieldNumber = 4;
+    public const int TypeFieldNumber = 5;
     private global::CyDrive.MessageType type_ = global::CyDrive.MessageType.Text;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -140,7 +154,7 @@ namespace CyDrive.Models {
     }
 
     /// <summary>Field number for the "content" field.</summary>
-    public const int ContentFieldNumber = 5;
+    public const int ContentFieldNumber = 6;
     private string content_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -152,7 +166,7 @@ namespace CyDrive.Models {
     }
 
     /// <summary>Field number for the "sended_at" field.</summary>
-    public const int SendedAtFieldNumber = 6;
+    public const int SendedAtFieldNumber = 7;
     private global::Google.Protobuf.WellKnownTypes.Timestamp sendedAt_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -164,7 +178,7 @@ namespace CyDrive.Models {
     }
 
     /// <summary>Field number for the "expire" field.</summary>
-    public const int ExpireFieldNumber = 7;
+    public const int ExpireFieldNumber = 8;
     private int expire_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -192,6 +206,7 @@ namespace CyDrive.Models {
       }
       if (Id != other.Id) return false;
       if (Sender != other.Sender) return false;
+      if (SenderName != other.SenderName) return false;
       if (Receiver != other.Receiver) return false;
       if (Type != other.Type) return false;
       if (Content != other.Content) return false;
@@ -205,8 +220,9 @@ namespace CyDrive.Models {
     public override int GetHashCode() {
       int hash = 1;
       if (Id != 0L) hash ^= Id.GetHashCode();
-      if (Sender != 0) hash ^= Sender.GetHashCode();
-      if (Receiver != 0) hash ^= Receiver.GetHashCode();
+      if (Sender.Length != 0) hash ^= Sender.GetHashCode();
+      if (SenderName.Length != 0) hash ^= SenderName.GetHashCode();
+      if (Receiver.Length != 0) hash ^= Receiver.GetHashCode();
       if (Type != global::CyDrive.MessageType.Text) hash ^= Type.GetHashCode();
       if (Content.Length != 0) hash ^= Content.GetHashCode();
       if (sendedAt_ != null) hash ^= SendedAt.GetHashCode();
@@ -233,28 +249,32 @@ namespace CyDrive.Models {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
       }
-      if (Sender != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Sender);
+      if (Sender.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Sender);
       }
-      if (Receiver != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Receiver);
+      if (SenderName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(SenderName);
+      }
+      if (Receiver.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Receiver);
       }
       if (Type != global::CyDrive.MessageType.Text) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteEnum((int) Type);
       }
       if (Content.Length != 0) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(50);
         output.WriteString(Content);
       }
       if (sendedAt_ != null) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(58);
         output.WriteMessage(SendedAt);
       }
       if (Expire != 0) {
-        output.WriteRawTag(56);
+        output.WriteRawTag(64);
         output.WriteInt32(Expire);
       }
       if (_unknownFields != null) {
@@ -271,28 +291,32 @@ namespace CyDrive.Models {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
       }
-      if (Sender != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Sender);
+      if (Sender.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Sender);
       }
-      if (Receiver != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(Receiver);
+      if (SenderName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(SenderName);
+      }
+      if (Receiver.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(Receiver);
       }
       if (Type != global::CyDrive.MessageType.Text) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteEnum((int) Type);
       }
       if (Content.Length != 0) {
-        output.WriteRawTag(42);
+        output.WriteRawTag(50);
         output.WriteString(Content);
       }
       if (sendedAt_ != null) {
-        output.WriteRawTag(50);
+        output.WriteRawTag(58);
         output.WriteMessage(SendedAt);
       }
       if (Expire != 0) {
-        output.WriteRawTag(56);
+        output.WriteRawTag(64);
         output.WriteInt32(Expire);
       }
       if (_unknownFields != null) {
@@ -308,11 +332,14 @@ namespace CyDrive.Models {
       if (Id != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
-      if (Sender != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Sender);
+      if (Sender.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Sender);
       }
-      if (Receiver != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Receiver);
+      if (SenderName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SenderName);
+      }
+      if (Receiver.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Receiver);
       }
       if (Type != global::CyDrive.MessageType.Text) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
@@ -341,10 +368,13 @@ namespace CyDrive.Models {
       if (other.Id != 0L) {
         Id = other.Id;
       }
-      if (other.Sender != 0) {
+      if (other.Sender.Length != 0) {
         Sender = other.Sender;
       }
-      if (other.Receiver != 0) {
+      if (other.SenderName.Length != 0) {
+        SenderName = other.SenderName;
+      }
+      if (other.Receiver.Length != 0) {
         Receiver = other.Receiver;
       }
       if (other.Type != global::CyDrive.MessageType.Text) {
@@ -381,30 +411,34 @@ namespace CyDrive.Models {
             Id = input.ReadInt64();
             break;
           }
-          case 16: {
-            Sender = input.ReadInt32();
+          case 18: {
+            Sender = input.ReadString();
             break;
           }
-          case 24: {
-            Receiver = input.ReadInt32();
+          case 26: {
+            SenderName = input.ReadString();
             break;
           }
-          case 32: {
+          case 34: {
+            Receiver = input.ReadString();
+            break;
+          }
+          case 40: {
             Type = (global::CyDrive.MessageType) input.ReadEnum();
             break;
           }
-          case 42: {
+          case 50: {
             Content = input.ReadString();
             break;
           }
-          case 50: {
+          case 58: {
             if (sendedAt_ == null) {
               SendedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(SendedAt);
             break;
           }
-          case 56: {
+          case 64: {
             Expire = input.ReadInt32();
             break;
           }
@@ -427,30 +461,34 @@ namespace CyDrive.Models {
             Id = input.ReadInt64();
             break;
           }
-          case 16: {
-            Sender = input.ReadInt32();
+          case 18: {
+            Sender = input.ReadString();
             break;
           }
-          case 24: {
-            Receiver = input.ReadInt32();
+          case 26: {
+            SenderName = input.ReadString();
             break;
           }
-          case 32: {
+          case 34: {
+            Receiver = input.ReadString();
+            break;
+          }
+          case 40: {
             Type = (global::CyDrive.MessageType) input.ReadEnum();
             break;
           }
-          case 42: {
+          case 50: {
             Content = input.ReadString();
             break;
           }
-          case 50: {
+          case 58: {
             if (sendedAt_ == null) {
               SendedAt = new global::Google.Protobuf.WellKnownTypes.Timestamp();
             }
             input.ReadMessage(SendedAt);
             break;
           }
-          case 56: {
+          case 64: {
             Expire = input.ReadInt32();
             break;
           }

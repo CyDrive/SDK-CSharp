@@ -27,6 +27,8 @@ namespace CyDrive.Models
         public FileInfo FileInfo { get; set; }
         public DateTime StartAt { get; set; }
 
+        public long DoneBytes { get; private set; }
+
         // Optional parameters
         public bool ShouldTruncate { get; set; }
         public int BufferSize { get; set; } = 4096;
@@ -42,6 +44,7 @@ namespace CyDrive.Models
             FileInfo = fileInfo;
 
             StartAt = DateTime.Now;
+            DoneBytes = 0;
         }
 
         public async void StartAsync()
@@ -68,37 +71,45 @@ namespace CyDrive.Models
 
         public async Task DownloadData()
         {
-            var stream = tcpClient.GetStream();
-            var sendIdTask = SendIdAsync(stream);
-
-            // Open/Create file
-            var fileMode = FileMode.OpenOrCreate;
-            var fs = File.Open(LocalPath, fileMode);
-            fs.Seek(Offset, SeekOrigin.Begin);
-            if (ShouldTruncate)
+            try
             {
-                fs.SetLength(Offset);
-            }
+                var stream = tcpClient.GetStream();
+                var sendIdTask = SendIdAsync(stream);
 
-            await sendIdTask;
-
-            // Download file
-            byte[] buf = new byte[BufferSize];
-            while (true)
-            {
-                var readBytesCount = await stream.ReadAsync(buf, 0, buf.Length);
-                if (readBytesCount == 0)
+                // Open/Create file
+                Directory.CreateDirectory(Path.GetDirectoryName(LocalPath));
+                var fileMode = FileMode.OpenOrCreate;
+                var fs = File.Open(LocalPath, fileMode);
+                fs.Seek(Offset, SeekOrigin.Begin);
+                if (ShouldTruncate)
                 {
-                    break;
+                    fs.SetLength(Offset);
                 }
 
-                await fs.WriteAsync(buf, 0, readBytesCount);
-                await fs.FlushAsync();
-                Offset += readBytesCount;
-            }
+                await sendIdTask;
 
-            fs.Close();
-            tcpClient.Close();
+                // Download file
+                byte[] buf = new byte[BufferSize];
+                while (true)
+                {
+                    var readBytesCount = await stream.ReadAsync(buf, 0, buf.Length);
+                    if (readBytesCount == 0)
+                    {
+                        break;
+                    }
+
+                    await fs.WriteAsync(buf, 0, readBytesCount);
+                    await fs.FlushAsync();
+                    Offset += readBytesCount;
+                }
+
+                fs.Close();
+                tcpClient.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task UploadData()
@@ -106,7 +117,7 @@ namespace CyDrive.Models
             var stream = tcpClient.GetStream();
             var sendIdTask = SendIdAsync(stream);
 
-            var fs = File.Open(LocalPath, FileMode.Open,FileAccess.Read);
+            var fs = File.Open(LocalPath, FileMode.Open, FileAccess.Read);
             fs.Seek(Offset, SeekOrigin.Begin);
 
             await sendIdTask;
@@ -145,7 +156,7 @@ namespace CyDrive.Models
             {
                 Array.Reverse(idBytes);
             }
-            await stream.WriteAsync(idBytes,0,idBytes.Length);
+            await stream.WriteAsync(idBytes, 0, idBytes.Length);
         }
     }
 }

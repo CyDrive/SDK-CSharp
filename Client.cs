@@ -10,6 +10,7 @@ using System.IO;
 using WebSocketSharp;
 using System.Net.Http;
 using System.ComponentModel;
+using DeviceId;
 
 namespace CyDrive
 {
@@ -20,10 +21,10 @@ namespace CyDrive
         private WebSocket messageClient;
         private HttpClient client;
 
-        public readonly string ServerAddr = "123.57.39.79:6454";
         public bool IsLogin { get; set; }
         public Account Account = new Account();
-        public readonly int DeviceId;
+        public string DeviceId { get; protected set; }
+        public string DeviceName { get; protected set; }
 
         public event EventHandler OnOpen
         {
@@ -45,15 +46,18 @@ namespace CyDrive
             remove { messageClient.OnClose -= value; }
         }
 
-        public CyDriveClient(string serverAddr, int deviceId, Account account = null)
+        public CyDriveClient(string serverAddr, Account account = null)
         {
             // Set up http client
+            DeviceId = new DeviceIdBuilder().AddMacAddress().ToString();
+            DeviceName = new DeviceIdBuilder().AddMachineName().ToString();
+
             baseAddr = new Uri(string.Format("http://{0}", serverAddr));
             cookies = new CookieContainer();
             var handler = new HttpClientHandler() { CookieContainer = cookies };
             client = new HttpClient(handler) { BaseAddress = baseAddr };
-            messageClient = new WebSocket($"ws://{serverAddr}/message_service?device_id={deviceId}");
-            DeviceId = deviceId;
+
+            messageClient = new WebSocket($"ws://{serverAddr}/message_service?device_id={DeviceId}");
 
             if (account != null)
             {
@@ -313,24 +317,27 @@ namespace CyDrive
 
         // You should fill the message with fields:
         // receiver, type, content
-        private async void SendMessage(Message message, Action<bool> OnCompleted)
+        private async void SendMessage(Message message)
         {
+            message.Sender = DeviceId;
+            message.SenderName = DeviceName;
+            message.SendedAt = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.Now);
             string messageString = JsonFormatter.Default.Format(message);
-            messageClient.SendAsync(messageString, OnCompleted);
+            messageClient.SendAsync(messageString, (ok) => { });
         }
 
-        public async void SendText(string text, int receiver, Action<bool> OnCompleted)
+        public async Task<Message> SendText(string text, string receiver)
         {
             Message message = new Message()
             {
-                Sender = DeviceId,
                 Receiver = receiver,
                 Type = MessageType.Text,
                 Content = text,
-                SendedAt = Google.Protobuf.WellKnownTypes.Timestamp.FromDateTime(DateTime.Now),
             };
 
-            SendMessage(message, OnCompleted);
+            SendMessage(message);
+
+            return message;
         }
 
         private void updateAccount(ref Account account, SafeAccount safeAccount)
@@ -346,10 +353,5 @@ namespace CyDrive
     public class MessageEventArgs : EventArgs
     {
         public Message Message;
-    }
-
-    public class MessagePublisher
-    {
-
     }
 }
